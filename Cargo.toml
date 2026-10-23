@@ -1,0 +1,54 @@
+[package]
+name = "whereami"
+version = "0.1.0"
+edition = "2024"
+description = "Print the current street address, coordinates and time zone using CoreLocation"
+license = "MIT"
+repository = "https://github.com/alisezer/whereami"
+readme = "README.md"
+keywords = ["location", "corelocation", "geocoding", "macos", "cli"]
+categories = ["command-line-utilities", "os::macos-apis"]
+publish = false
+
+[dependencies]
+# block2 and objc2-contacts are part of the objc2 project: block2 for CLGeocoder's
+# completion handler, objc2-contacts for CNPostalAddressFormatter (locale-correct
+# address lines). Neither needs Contacts permission.
+block2 = "0.6.2"
+objc2 = "0.6.5"
+objc2-contacts = { version = "0.3.2", default-features = false, features = [
+    "std",
+    "CNPostalAddress",
+    "CNPostalAddressFormatter",
+] }
+objc2-core-location = { version = "0.3.2", default-features = false, features = [
+    "std",
+    "block2",
+    "CLError",
+    "CLGeocoder",
+    "CLLocation",
+    "CLLocationManager",
+    "CLLocationManagerDelegate",
+    "CLPlacemark",
+    "objc2-contacts",
+] }
+objc2-foundation = { version = "0.3.2", default-features = false, features = [
+    "std",
+    "NSArray",
+    "NSDate",
+    "NSEnumerator",
+    "NSError",
+    "NSFormatter",
+    "NSISO8601DateFormatter",
+    "NSObjCRuntime",
+    "NSObject",
+    "NSRunLoop",
+    "NSString",
+    "NSTimeZone",
+] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[profile.release]
+strip = true
+lto = true
