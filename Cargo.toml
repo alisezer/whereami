@@ -11,9 +11,9 @@ categories = ["command-line-utilities", "os::macos-apis"]
 publish = false
 
 [dependencies]
-# block2 and objc2-contacts are part of the objc2 project: block2 for CLGeocoder's
-# completion handler, objc2-contacts for CNPostalAddressFormatter (locale-correct
-# address lines). Neither needs Contacts permission.
+# block2, objc2-contacts and objc2-map-kit are part of the objc2 project: block2 for
+# completion handlers, objc2-contacts for CNPostalAddressFormatter (locale-correct
+# address lines, no Contacts permission needed), objc2-map-kit for nearby places.
 block2 = "0.6.2"
 objc2 = "0.6.5"
 objc2-contacts = { version = "0.3.2", default-features = false, features = [
@@ -45,6 +45,19 @@ objc2-foundation = { version = "0.3.2", default-features = false, features = [
     "NSRunLoop",
     "NSString",
     "NSTimeZone",
+    "NSURL",
+] }
+objc2-map-kit = { version = "0.3.2", default-features = false, features = [
+    "std",
+    "block2",
+    "objc2-core-location",
+    "MKLocalPointsOfInterestRequest",
+    "MKLocalSearch",
+    "MKLocalSearchResponse",
+    "MKMapItem",
+    "MKPlacemark",
+    "MKPointOfInterestCategory",
+    "MKPointOfInterestFilter",
 ] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
